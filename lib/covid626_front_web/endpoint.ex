@@ -12,7 +12,7 @@ defmodule Covid626FrontWeb.Endpoint do
 
   socket "/socket", Covid626FrontWeb.UserSocket,
     websocket: true,
-    longpoll: false
+    longpoll: [timeout: 45000]
 
   # Serve at "/" the static files from "priv/static" directory.
   #
