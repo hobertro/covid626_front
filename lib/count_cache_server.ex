@@ -1,7 +1,7 @@
 defmodule CountCacheServer do
 
   @name :count_cache_server
-  @refresh_interval :timer.seconds(5) # timer.minutes(60)
+  @refresh_interval :timer.minutes(60)
 
   use GenServer
 
@@ -12,7 +12,7 @@ defmodule CountCacheServer do
     {:ok, initial_state}
   end
 
-  def start do
+  def start_link(_arg) do
     IO.puts "Starting the cache server"
     GenServer.start(__MODULE__, %{city_count: [], total_count: "0"}, name: @name)
   end

@@ -11,7 +11,8 @@ defmodule Covid626Front.Application do
       # Start the Ecto repository
       Covid626Front.Repo,
       # Start the endpoint when the application starts
-      Covid626FrontWeb.Endpoint
+      Covid626FrontWeb.Endpoint,
+      CountCacheServer
       # Starts a worker by calling: Covid626Front.Worker.start_link(arg)
       # {Covid626Front.Worker, arg},
     ]
