@@ -1,0 +1,15 @@
+
+<table>
+<tr>
+  <th>City</th>
+  <th>Number of Cases</th>
+</tr>
+  <%= for city <- @cities do %>
+    <tr>
+      <td><%= city.city %></td>
+      <td><%= city.number_of_cases %></td>
+    </tr>
+  <% end %>
+
+  <strong>Total cases in the 626: <%= @total_count %></strong>
+</table>

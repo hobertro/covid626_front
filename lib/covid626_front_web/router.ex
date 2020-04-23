@@ -17,6 +17,7 @@ defmodule Covid626FrontWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/cities", PageController, :cities
   end
 
   # Other scopes may use custom stacks.
