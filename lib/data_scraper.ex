@@ -15,6 +15,7 @@ defmodule DataScraper do
          |> filter_initial_data
          |> filter_for_sgv
          |> get_values_for_cities
+        consolidate = consolidate_city_data(response)
         total = total_cases(response)
         {:ok, response, total}
       {:ok, %HTTPoison.Response{status_code: 404}} ->
@@ -22,6 +23,31 @@ defmodule DataScraper do
       {:error, %HTTPoison.Error{ reason: reason}} ->
         IO.inspect reason
     end
+  end
+
+  # new_hash = {}
+  # arr = [{ city: city1, number_of_cases: 123 }, {city: city2,  number_of_cases: 456}, {city: city3, number_of_cases: 678}]
+  # arr.each do |city|
+  #   if new_hash[:city].present?
+  #     new_hash[:city] =+ city[:number_of_cases]
+  #   else
+  #     new_hash[:city] = city[:number_of_cases]
+  #   end
+  # end
+  def consolidate_city_data(city_list) do
+    Enum.reduce(city_list, %{}, fn value, acc ->
+IO.inspect acc
+IO.inspect value
+IO.inspect "tests"
+IO.inspect acc[value[:city]]
+IO.inspect "acc[value[:city]]"
+      case acc[value[:city]] do
+        _ ->
+          Map.update(acc, value[:city], acc[:number_of_cases] + String.to_integer(value[:number_of_cases]))
+        nil ->
+          Map.put(acc, value[:city], String.to_integer(value[:number_of_cases]))
+      end
+    end)
   end
 
   def filter_initial_data(list) do
