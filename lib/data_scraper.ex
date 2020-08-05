@@ -15,7 +15,7 @@ defmodule DataScraper do
          |> filter_initial_data
          |> filter_for_sgv
          |> get_values_for_cities
-        consolidate = consolidate_city_data(response)
+        # consolidate = consolidate_city_data(response)
         total = total_cases(response)
         {:ok, response, total}
       {:ok, %HTTPoison.Response{status_code: 404}} ->
@@ -79,7 +79,7 @@ IO.inspect "acc[value[:city]]"
 
   def get_values_for_cities(list) do
     Enum.map(list, fn value ->
-      [city_tuple, number_tuple, _]  = value
+      [city_tuple, number_tuple, case_rate, deaths, death_rate]  = value
       {_, _, city}                   = city_tuple
       {_, _, number_of_cases}        = number_tuple
       city   = filter_misc_values(List.first(city))
